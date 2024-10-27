@@ -1,0 +1,64 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body class="fondo-gris d-flex justify-content-center align-items-center vh-100">
+    <div
+        class="bg-white p-5 rounded-5 text-secondary shadow"
+        style="width: 40rem"
+        >            
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <div class="d-flex justify-content-center">
+            <img
+                src="{% static 'assets/parking-svgrepo-com.svg'%}"
+                alt="login-icon"
+                style="width: 40%;"
+            />
+        </div>
+        <div class="text-center fs-1 fw-bold">Registro de Nuevo Usuario</div>
+            
+        <form method="post">
+            {% csrf_token %}
+            <div class="input-group mt-4">
+                {{ form.as_p }}
+            </div>
+            <div class="w-100 mt-4 fw-semibold shadow-sm">
+                <button type="submit" class="btn-background btn-sm btn-block">Registrarse</button>
+            </div>
+        </form>
+        
+        <p>¿Ya tienes una cuenta? <a href="{% url 'login' %}">Inicia sesión aquí</a></p>
+    </div>
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+<style>
+.fondo-gris {
+  background-color: rgb(240, 240, 240) !important;
+
+}
+.btn-background {
+  background-color: #3d2572 !important;
+  color: rgb(240, 240, 240); !important;
+  border: none !important;
+}
+
+
+.message-success {
+  background-color: #71A92D;
+  color: rgb(240, 240, 240);
+}
+</style>

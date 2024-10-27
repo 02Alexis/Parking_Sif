@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %} {{ title }} {% endblock %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1>Liquidacion Parqueadero Jogal</h1>
+        <button title="Agregar Liquidacion" class="btn btn-background btn-sm btn-block" onclick="open_modal_create('{% url 'add_parking_jogal' %}')" data-bs-toggle="modal"><i class="bi bi-plus-square"></i></button>
+        <!-- Contenedor del modal -->
+        <div class="modal fade" id="crear" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
+    </div>
+    <div class="card card-body">
+        <table id="settlements_jogal" class="table table-hover" style="width:100%" style="cursor: pointer;">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Fecha</th>
+                    <th>Lavado</th>
+                    <th>Parqueo</th>
+                    <th>Ingresos</th>
+                    <th>Novedades</th>
+                    <th>Gastos</th>
+                    <th>Liquidación</th>
+                    <th>Observaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for settlement_jogal in settlements_jogal %}
+                <tr onclick="open_modal_update('{% url 'update_parking_jogal' settlement_jogal.id %}')" style="cursor: pointer;">
+                    <td>{{ settlement_jogal.id }}</td>
+                    <td class="danger">{{ settlement_jogal.date }}</td>
+                    <td>${{ settlement_jogal.washing }}</td>
+                    <td>${{ settlement_jogal.parking }}</td>
+                    <td>${{ settlement_jogal.income }}</td>
+                    <td class="table-danger">${{ settlement_jogal.news }}</td>
+                    <td class="table-danger">${{ settlement_jogal.expenses }}</td>
+                    <td class="{% if settlement_jogal.settlement_amount < 0 %}table-danger{% elif settlement_jogal.settlement_amount > 0 %}table-warning{% endif %}">${{ settlement_jogal.settlement_amount }}</td>
+                    <td>{{ settlement_jogal.remarks }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+<script src="{% static 'js/settlements_jogal.js' %}"></script>
+{% endblock %}
+
+{% block extrajs %}
+<script type="text/javascript">
+  function open_modal_create(url) {
+    $("#crear").load(url, function () {
+      $(this).modal("show");
+    });
+  }
+</script>
+
+<script type="text/javascript">
+  function open_modal_update(url) {
+    $("#crear").load(url, function () {
+      $(this).modal("show");
+    });
+  }
+</script>
+{% endblock extrajs %}

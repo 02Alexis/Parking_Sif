@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %} {{ title }} {% endblock %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1>Liquidacion Parqueadero Hoyo</h1>
+        <button title="Agregar Liquidacion" class="btn btn-background btn-sm btn-block" onclick="open_modal_create('{% url 'add_parking' %}')" data-bs-toggle="modal"><i class="bi bi-plus-square"></i></button>
+        <!-- Contenedor del modal -->
+        <div class="modal fade" id="crear" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
+    </div>
+    <div class="card card-body">
+      <table id="example" class="table table-hover" style="width:100%">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Fecha</th>
+            <th>Lavado</th>
+            <th>Parqueo</th>
+            <th>Ingresos</th>
+            <th>Novedades</th>
+            <th>Gastos</th>
+            <th>Liquidación</th>
+            <th>Observaciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for settlement in settlements %}
+            <tr onclick="open_modal_update('{% url 'update_parking' settlement.id %}')" style="cursor: pointer;">
+              <td>{{ settlement.id }}</td>
+              <td class="danger">{{ settlement.date }}</td>
+              <td>${{ settlement.washing }}</td>
+              <td>${{ settlement.parking }}</td>
+              <td>${{ settlement.income }}</td>
+              <td class="table-danger">${{ settlement.news }}</td>
+              <td class="table-danger">${{ settlement.expenses }}</td>
+              <td class="{% if settlement.settlement_amount < 0 %}table-danger{% elif settlement.settlement_amount > 0 %}table-warning{% endif %}">${{ settlement.settlement_amount }}</td>
+              <td>{{ settlement.remarks }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+    </div>
+</div>
+<script src="{% static 'js/index.js' %}"></script>
+{% endblock %}
+
+{% block extrajs %}
+<script type="text/javascript">
+  function open_modal_create(url) {
+    $("#crear").load(url, function () {
+      $(this).modal("show");
+    });
+  }
+</script>
+
+<script type="text/javascript">
+  function open_modal_update(url) {
+    $("#crear").load(url, function () {
+      $(this).modal("show");
+    });
+  }
+</script>
+{% endblock extrajs %}

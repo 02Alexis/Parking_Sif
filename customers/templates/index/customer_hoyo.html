@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %} {{ title }} {% endblock %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1>Mensualidad Parqueadero Hoyo</h1>
+        <button title="Nuevo Cliente" class="btn btn-background btn-sm btn-block" onclick="open_modal_create('{% url 'create_customer' %}')" data-bs-toggle="modal"><i class="bi bi-plus-square"></i></button>
+        <!-- Contenedor del modal -->
+        <div class="modal fade" id="crear" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
+    </div>
+    <div class="card card-body">
+        <table id="customer_hoyo" class="table table-hover" style="width:100%">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Telefono</th>
+                    <th>Vehiculo</th>
+                    <th>Placa</th>
+                    <th>Precio</th>
+                    <th>Día de pago</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for customer in customers %}
+                <tr onclick="open_modal_update('{% url 'update_customer' customer.id %}')">
+                    <td>{{ customer.id }}</td>
+                    <td>{{ customer.name }}</td>
+                    <td>{{ customer.phone }}</td>
+                    <td>{{ customer.vehicle }}</td>
+                    <td>{{ customer.license_plate }}</td>
+                    <td>${{ customer.price }}</td>
+                    <td>{{ customer.payment_day }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+<script src="{% static 'js/datatable/customer/customer_hoyo.js' %}"></script>
+{% endblock %}
+
+{% block extrajs %}
+<script type="text/javascript">
+  function open_modal_create(url) {
+    $("#crear").load(url, function () {
+      $(this).modal("show");
+    });
+  }
+</script>
+
+<script type="text/javascript">
+  function open_modal_update(url) {
+    $("#crear").load(url, function () {
+      $(this).modal("show");
+    });
+  }
+</script>
+{% endblock extrajs %}

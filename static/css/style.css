@@ -1,0 +1,123 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+:root {
+  /* Sidebar */
+  --sidebar-background: rgb(240, 240, 240);
+  --menu-hamburguer: #5F5E5B;
+  --text-color: #37352F;
+  --text-links: rgb(95, 94, 91);
+  --text-links-hover: rgba(255, 255, 255, 0.075);
+  --text-links-border-left: #3d2572;
+
+  --btn-button: rgb(240, 240, 240);
+  --btn-color-button: #37352F;
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #D3D1CB  rgba(0, 0, 0, 0);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgb(216,212,204);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+}
+body {
+  font-family: "Poppins", sans-serif !important;
+  background-color: rgb(240, 240, 240) !important;
+  padding: 40px;
+}
+.main{
+  margin-top: 20px;
+  min-height: 100vh;
+}
+.background-color {
+  background-color: white;
+  box-shadow: 5px 5px 10px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  
+}
+a.nav-link {
+  color: rgb(25, 25, 25) !important;
+}
+a.nav-link.active {
+  color: #5d17ef !important;
+}
+/* 404 */
+.contenedor {
+  background: #FCFEFC;
+  padding: .5rem;
+  width: 100%;
+  display: flex;
+  gap: .5rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.texto {
+  font-size: 1.4rem;
+  color: rgb(97, 97, 97);
+  text-align: center;
+  font-weight: 200;
+}
+
+.texto span {
+  color: #5d17ef;
+  font-weight: 300;
+}
+
+.error {
+  width: 40%; 
+  background-position: center;
+  background-size: cover;
+}
+
+@media screen and (max-width:678px) {
+  .texto {font-size: 1.2rem;}
+  .error {width: 60%;}  
+}
+
+@media screen and (max-width:400px) {
+  .texto {font-size: 1rem;}
+  .error {width: 75%;
+  }  
+}
+
+.active > .page-link,
+.page-link.active {
+  background-color: rgb(216,212,204) !important;
+  border-color: rgb(216,212,204) !important;
+}
+a.page-link {
+  color: rgb(25, 25, 25) !important;
+}
+div.dt-container .dt-paging .dt-paging-button {
+  padding: 0 !important;
+  margin-left: 0 !important;
+}
+
+.btn-background {
+ color: var(--btn-color-button) !important;
+ background: var(--btn-button) !important;
+}
+
+.btn-background-pdf {
+  color: red !important;
+  font-size: 25px !important;
+  border: none;
+}
